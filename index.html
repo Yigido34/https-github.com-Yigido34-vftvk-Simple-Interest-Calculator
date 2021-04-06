@@ -1,16 +1,65 @@
+<!DOCTYPE html>
+
 <html>
     <head>
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
+    <title>Web App - Simple Interest Calculator</title>
     </head>
     <body>
-        <h1>Simple Interest Calculator</h1>
+        <div class="maindiv">
+          <h1>Simple Interest Calculator</h1>
+          <a onchange="validate_numer()">Amount <input type="number"  id="principal">  <br/></a>
+          <a>Interest Rate <input onchange="read_value()" type="range" min="1" max="20" step="0.25" id="rate"> <span id="rate_value" > 10.5% </span> <br/></a>
+          <a>No. of Years <select id="years" name="years" ><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select><br></a>
+          <a><button onclick="compute()">Compute Interest</button></a>
+          <a><span id="result"></span></a>
+          <footer> Ⓒ Everyone Can Get Rich </footer>
+        </div>
 
-        Amount <input type="number"  id="principal">  <br/>
-        Rate <input type="number"  id="rate">  <br/>
-        No. of Years <input type="number"  id="years">  <br/>
-        Interest : <span id="result"></span><br>
-
-        <button onclick="compute()">Compute</button>
     </body>
 </html>
+ 43  script.js 
+@@ -1,6 +1,37 @@
+function compute()
+{
+    p = document.getElementById("principal").value;
+
+}
+
+function compute()
+{
+    principal = document.getElementById("principal").value;
+    rate = document.getElementById("rate").value;
+    years = document.getElementById("years").value;
+    interest = principal * years * rate / 100
+    actual_year = new Date().getFullYear()
+    future_year = actual_year + Number(years)
+
+    if (validate_numer() == true) {
+        document.getElementById("result").innerHTML =
+    "If you deposit <mark>" + principal + "</mark>,<br />" +
+    "at an interest rate of <mark>" + rate + "</mark>.<br />" +
+    "You will receive an amount of <mark>" + interest + "</mark>,<br />" +
+    "in the year <mark>" + future_year + "</mark>"
+    }
+}
+
+function read_value()
+{
+    document.getElementById("rate_value").innerHTML = document.getElementById("rate").value + '%';
+
+}
+
+function validate_numer()
+{
+    amount = document.getElementById("principal").value;
+
+    if (amount <= 0) {
+        alert('Enter a positive number')
+        document.getElementById("principal").focus()
+        return false
+    }
+
+    return true
+}
